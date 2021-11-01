@@ -1087,14 +1087,21 @@ def registration_log_element_ratios_times_masses(
             short_species = {
                 "LogOxygenOverHydrogen": "O_over_H",
                 "LogIronOverHydrogen": "Fe_over_H",
+                "LogOxygenOverHydrogenAtomic": "O_over_H_atomic",
+                "LogOxygenOverHydrogenMolecular": "O_over_H_molecular",
             }[long_species]
             element_name = {
                 "LogOxygenOverHydrogen": "Oxygen",
                 "LogIronOverHydrogen": "Iron",
+                "LogOxygenOverHydrogenAtomic": "Atomic-phase Oxygen",
+                "LogOxygenOverHydrogenMolecular": "Molecular-phase Oxygen",
+
             }[long_species]
             fraction_name = {
                 "LogOxygenOverHydrogen": "O/H",
                 "LogIronOverHydrogen": "Fe/H",
+                "LogOxygenOverHydrogenAtomic": "O/H",
+                "LogOxygenOverHydrogenMolecular": "O/H",
             }[long_species]
 
             short_floortype = {"Lo": "lowfloor", "Hi": "highfloor",}[floor_type]
@@ -1185,17 +1192,33 @@ def registration_dust_masses(
             short_species = {
                 "GraphiteMasses": "graphite",
                 "SilicatesMasses": "silicates",
+                "GraphiteMassesAtomic": "atomic_graphite",
+                "SilicatesMassesAtomic": "atomic_silicates",
+                "GraphiteMassesMolecular": "molecular_graphite",
+                "SilicatesMassesMolecular": "molecular_silicates",
+                "GraphiteMassesColdDense": "cold_dense_graphite",
+                "SilicatesMassesColdDense": "cold_dense_silicates",                
             }[long_species]
+            pretty_name = {
+                "GraphiteMasses": "Graphite Dust Mass",
+                "SilicatesMasses": "Silicate Dust Mass",
+                "GraphiteMassesAtomic": "Graphite Dust Mass in Atomic Gas",
+                "SilicatesMassesAtomic": "Silicate Dust Mass in Atomic Gas",
+                "GraphiteMassesMolecular": "Graphite Dust Mass in Molecular Gas",
+                "SilicatesMassesMolecular": "Silicate Dust Mass in Molecular Gas",
+                "GraphiteMassesColdDense": "Graphite Dust Mass in Cold-Dense Gas",
+                "SilicatesMassesColdDense": "Silicate Dust Mass in Cold-Dense Gas",                
+            }[long_species]
+        
         except KeyError:
             raise RegistrationDoesNotMatchError
 
-        full_name = f"{short_species} Dust Mass ({aperture_size} kpc)"
+        full_name = f"{pretty_name} ({aperture_size} kpc)"
         snake_case = f"{short_species}_mass_{aperture_size}_kpc"
-
+        
         return unit, full_name, snake_case
     else:
         raise RegistrationDoesNotMatchError
-
 
 def registration_stellar_luminosities(
     field_path: str, unit_system: VelociraptorUnits
