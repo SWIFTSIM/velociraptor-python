@@ -1082,17 +1082,18 @@ def registration_log_element_ratios_times_masses(
         floor_type = match.group(2)
         part_type = match.group(3)
         aperture_size = match.group(4)
-
         try:
             short_species = {
                 "LogOxygenOverHydrogen": "O_over_H",
                 "LogIronOverHydrogen": "Fe_over_H",
+                "LogSNIaIronOverHydrogen": "SNIaFe_over_H",
                 "LogOxygenOverHydrogenAtomic": "O_over_H_atomic",
                 "LogOxygenOverHydrogenMolecular": "O_over_H_molecular",
             }[long_species]
             element_name = {
                 "LogOxygenOverHydrogen": "Oxygen",
                 "LogIronOverHydrogen": "Iron",
+                "LogSNIaIronOverHydrogen": "SNIa Iron",
                 "LogOxygenOverHydrogenAtomic": "Atomic-phase Oxygen",
                 "LogOxygenOverHydrogenMolecular": "Molecular-phase Oxygen",
 
@@ -1100,6 +1101,7 @@ def registration_log_element_ratios_times_masses(
             fraction_name = {
                 "LogOxygenOverHydrogen": "O/H",
                 "LogIronOverHydrogen": "Fe/H",
+                "LogSNIaIronOverHydrogen": "Fe_SNIa/H",
                 "LogOxygenOverHydrogenAtomic": "O/H",
                 "LogOxygenOverHydrogenMolecular": "O/H",
             }[long_species]
@@ -1115,6 +1117,7 @@ def registration_log_element_ratios_times_masses(
             f"({aperture_size} kpc)"
         )
         snake_case = f"log_{short_species}_times_{part_type}_mass_{short_floortype}_{aperture_size}_kpc"
+        print(snake_case)
         return unit, full_name, snake_case
     else:
         raise RegistrationDoesNotMatchError
