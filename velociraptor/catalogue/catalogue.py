@@ -9,6 +9,7 @@ import unyt
 
 import numpy as np
 
+from types import EllipsisType
 from typing import Union, Callable, List, Dict
 from numpy.typing import NDArray
 
@@ -123,9 +124,6 @@ def generate_getter(
             with h5py.File(filename, "r") as handle:
                 try:
                     mask = getattr(self, "mask")
-                    # would rather set the default value of mask to Ellipsis, but
-                    # can't work out the type hint for this
-                    mask = Ellipsis if mask is None else mask
                     setattr(self, f"_{name}", unyt.unyt_array(handle[field][mask], unit))
                     getattr(self, f"_{name}").name = full_name
                     getattr(self, f"_{name}").file = filename
@@ -172,7 +170,7 @@ def generate_sub_catalogue(
     registration_function: Callable,
     units: VelociraptorUnits,
     field_metadata: List[VelociraptorFieldMetadata],
-    mask: Union[None, NDArray[bool], int] = None
+    mask: Union[EllipsisType, NDArray[bool], int] = Ellipsis
 ):
     """
     Generates a sub-catalogue object with the correct properties set.
@@ -236,7 +234,7 @@ class __VelociraptorSubCatalogue(object):
     # The valid paths contained within
     valid_sub_paths: List[str]
 
-    def __init__(self, filename, mask=None):
+    def __init__(self, filename, mask=Ellipsis):
         self.filename = filename
         self.mask = mask
 
@@ -263,7 +261,7 @@ class VelociraptorCatalogue(object):
         filename: str,
         disregard_units: bool = False,
         extra_registration_functions: Union[None, Dict[str, Callable]] = None,
-        mask: Union[None, NDArray[bool], int] = None,
+        mask: Union[EllipsisType, NDArray[bool], int] = Ellipsis,
     ):
         """
         Initialise the velociraptor catalogue with all of the available
@@ -291,10 +289,10 @@ class VelociraptorCatalogue(object):
             conform to the registration function API. This is an advanced
             feature.
 
-        mask: Union[None, NDArray[bool], int], optional
+        mask: Union[EllipsisType, NDArray[bool], int], optional
             If a boolean array is provided, it is used to mask all catalogue
             arrays. If an int is provided, catalogue arrays are masked to the
-            single corresponding element.
+            single corresponding element. Default: Ellipsis (``...``).
         """
         self.filename = filename
         self.disregard_units = disregard_units
