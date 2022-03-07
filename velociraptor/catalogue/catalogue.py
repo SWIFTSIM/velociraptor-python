@@ -9,7 +9,10 @@ import unyt
 
 import numpy as np
 
-from types import EllipsisType
+try:
+    from types import EllipsisType  # python3.10+
+except ImportError:
+    from typing import Any as EllipsisType  # better choice for this?
 from typing import Union, Callable, List, Dict
 from numpy.typing import NDArray
 
