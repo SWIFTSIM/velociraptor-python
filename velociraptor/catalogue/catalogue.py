@@ -317,11 +317,18 @@ class VelociraptorCatalogue(object):
         the memory location.
         """
 
-        return (
-            f"Velociraptor catalogue at {self.filename}. "
-            "Contains the following field collections: "
-            f"{', '.join(self.valid_field_metadata.keys())}"
-        )
+        if self.mask is Ellipsis:
+            return (
+                f"Velociraptor catalogue at {self.filename}. "
+                "Contains the following field collections: "
+                f"{', '.join(self.valid_field_metadata.keys())}"
+            )
+        else:
+            return (
+                f"Masked velociraptor catalogue at {self.filename}. "
+                "Contains the following field collections: "
+                f"{', '.join(self.valid_field_metadata.keys())}"
+            )
 
     def __repr__(self):
         return str(self)
