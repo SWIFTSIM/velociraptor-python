@@ -15,6 +15,7 @@ from velociraptor.units import VelociraptorUnits
 from velociraptor.catalogue.derived import DerivedQuantities
 from velociraptor.catalogue.registration import global_registration_functions
 from velociraptor.exceptions import RegistrationDoesNotMatchError
+from velociraptor.catalogue.reader import VelociraptorCatalogueReader
 
 
 class VelociraptorFieldMetadata(object):
@@ -88,7 +89,7 @@ class VelociraptorFieldMetadata(object):
         return
 
 
-def generate_getter(filename, name: str, field: str, full_name: str, unit):
+def generate_getter(reader, name: str, field: str, full_name: str, unit):
     """
     Generates a function that:
 
@@ -113,14 +114,9 @@ def generate_getter(filename, name: str, field: str, full_name: str, unit):
         if current_value is not None:
             return current_value
         else:
-            with h5py.File(filename, "r") as handle:
-                try:
-                    setattr(self, f"_{name}", unyt.unyt_array(handle[field][...], unit))
-                    getattr(self, f"_{name}").name = full_name
-                    getattr(self, f"_{name}").file = filename
-                except KeyError:
-                    print(f"Could not read {field}")
-                    return None
+            setattr(self, f"_{name}", unyt.unyt_array(reader.read_field(field), unit))
+            getattr(self, f"_{name}").name = full_name
+            getattr(self, f"_{name}").file = reader.filename
 
         return getattr(self, f"_{name}")
 
@@ -156,7 +152,7 @@ def generate_deleter(name: str):
 
 
 def generate_sub_catalogue(
-    filename,
+    reader,
     registration_name: str,
     registration_function: Callable,
     units: VelociraptorUnits,
@@ -173,10 +169,7 @@ def generate_sub_catalogue(
     """
 
     # This creates a _copy_ of the _class_, not object.
-    this_sub_catalogue_bases = (
-        __VelociraptorSubCatalogue,
-        object,
-    )
+    this_sub_catalogue_bases = (__VelociraptorSubCatalogue, object)
     this_sub_catalogue_dict = {}
 
     valid_sub_paths = []
@@ -186,11 +179,7 @@ def generate_sub_catalogue(
 
         this_sub_catalogue_dict[metadata.snake_case] = property(
             generate_getter(
-                filename,
-                metadata.snake_case,
-                metadata.path,
-                metadata.name,
-                metadata.unit,
+                reader, metadata.snake_case, metadata.path, metadata.name, metadata.unit
             ),
             generate_setter(metadata.snake_case),
             generate_deleter(metadata.snake_case),
@@ -205,7 +194,7 @@ def generate_sub_catalogue(
     )
 
     # Finally, we can actually create an instance of our new class.
-    catalogue = ThisSubCatalogue(filename=filename)
+    catalogue = ThisSubCatalogue(filename=reader.filename)
     catalogue.valid_sub_paths = valid_sub_paths
 
     return catalogue
@@ -375,6 +364,8 @@ class VelociraptorCatalogue(object):
             else:
                 self.invalid_field_paths.append(path)
 
+        reader = VelociraptorCatalogueReader(self.filename)
+
         # For each registration function, we create a dynamic sub-class that
         # contains only that information - otherwise the namespace of the
         # VelociraptorCatalogue is way too crowded.
@@ -383,7 +374,7 @@ class VelociraptorCatalogue(object):
                 self,
                 attribute_name,
                 generate_sub_catalogue(
-                    filename=self.filename,
+                    reader=reader,
                     registration_name=attribute_name,  # This ensures each class has a unique name
                     registration_function=self.registration_functions[attribute_name],
                     units=self.units,
