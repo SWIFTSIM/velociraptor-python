@@ -57,6 +57,9 @@ class VelociraptorGroups(object):
         halo.
         """
 
+        if catalogue.mask is not Ellipsis:
+            raise ValueError('VelociraptorGroups not compatible with masked catalogue.')
+        
         self.filename = filename
         self.catalogue = catalogue
 

@@ -62,6 +62,11 @@ based on the unit metadata in the file.
 There is also full unit information available in the ``data.units`` object, with
 an ``astropy`` cosmology object provided as ``data.units.cosmology``.
 
+Subsets of the catalogue can be read by providing a mask, for instance to read only values for the 3rd object in the catalogue (indexed from 0):
+
+.. code-block:: python
+   masked_data = load("/path/to/catalogue.properties", mask=3)
+
 Creating your first plot
 ------------------------
 

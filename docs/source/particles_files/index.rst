@@ -31,7 +31,8 @@ This returns two objects, ``particles``, and ``unbound_particles``,
 corresponding to both the bound and unbound component of your halo
 respectively. Each of these contains the information required to extract just
 those particles from a snapshot (this is made much easier by using the SWIFT
-integration, shown below).
+integration, shown below). Note that use of a masked ``catalogue`` is not
+supported.
 
 The instances of
 :class:`velociraptor.particles.particles.VelociraptorParticles` have several
