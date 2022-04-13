@@ -239,7 +239,7 @@ def registration_angular_momentum(
         raise RegistrationDoesNotMatchError
 
     # All are angular momenta, so have same units.
-    unit = unit_system.length * unit_system.velocity
+    unit = unit_system.mass * unit_system.length * unit_system.velocity
 
     # Capture group 1: axis (x, y, z)
     # Capture group 2: radius within this was calculated, e.g. 200crit
