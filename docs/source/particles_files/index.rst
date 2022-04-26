@@ -24,8 +24,10 @@ method, as follows:
    catalogue = load("{path_to_file}.properties")
    groups = load_groups("{path_to_groups}.catalog_groups", catalogue=catalogue)
 
-   particles, unbound_particles = groups.extract_halo(halo_id=100)
+   particles, unbound_particles = groups.extract_halo(halo_index=100)
 
+Note that the ``halo_index`` is the position of the halo in the group
+catalogue, not the halo's unique id.
 
 This returns two objects, ``particles``, and ``unbound_particles``,
 corresponding to both the bound and unbound component of your halo

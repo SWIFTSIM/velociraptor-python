@@ -100,10 +100,10 @@ class VelociraptorGroups(object):
 
         return
 
-    def extract_halo(self, halo_id: int, filenames: Union[Dict[str, str], None] = None):
+    def extract_halo(self, halo_index: int, filenames: Union[Dict[str, str], None] = None):
         """
-        Get a halo particles object for a given ID. Filenames is
-        either a dictionary with the following structure:
+        Get a halo particles object for a given index into the catalogue (NOT the halo unique
+        id). Filenames is either a dictionary with the following structure:
 
         {
             "particles_filename": "...",
@@ -149,7 +149,7 @@ class VelociraptorGroups(object):
             )
         assert (
             number_of_particles + number_of_unbound_particles
-            == self.group_size[halo_id]
+            == self.group_size[halo_index]
         ), "Something is incorrect in the calculation of group sizes for halo {}. Group_Size: {}, Bound: {}, Unbound: {}".format(
             halo_id, self.group_size[halo_id], number_of_particles, number_of_unbound_particles
         )
@@ -157,7 +157,7 @@ class VelociraptorGroups(object):
         particles = VelociraptorParticles(
             particles_filename=particles_filename,
             parttypes_filename=parttypes_filename,
-            offset=self.offset[halo_id],
+            offset=self.offset[halo_index],
             group_size=number_of_particles,
             groups_instance=self,
         )
@@ -165,14 +165,14 @@ class VelociraptorGroups(object):
         unbound_particles = VelociraptorParticles(
             particles_filename=unbound_particles_filename,
             parttypes_filename=unbound_parttypes_filename,
-            offset=self.offset_unbound[halo_id],
+            offset=self.offset_unbound[halo_index],
             group_size=number_of_unbound_particles,
             groups_instance=self,
         )
 
         if self.catalogue is not None:
-            particles.register_halo_attributes(self.catalogue, halo_id)
-            unbound_particles.register_halo_attributes(self.catalogue, halo_id)
+            particles.register_halo_attributes(self.catalogue, halo_index)
+            unbound_particles.register_halo_attributes(self.catalogue, halo_index)
 
         return particles, unbound_particles
 
@@ -260,52 +260,51 @@ class VelociraptorParticles(object):
 
         return
 
-    def register_halo_attributes(self, catalogue: VelociraptorCatalogue, halo_id: int):
+    def register_halo_attributes(self, catalogue: VelociraptorCatalogue, halo_index: int):
         """
         Registers useful halo attributes to this object (such as the mass and radii of the halo).
         """
 
-        self.halo_id = halo_id
+        self.halo_index = halo_index
 
-        self.mass_200crit = catalogue.masses.mass_200crit[halo_id]
-        self.mass_200mean = catalogue.masses.mass_200mean[halo_id]
-        self.mass_bn98 = catalogue.masses.mass_bn98[halo_id]
-        self.mass_fof = catalogue.masses.mass_fof[halo_id]
-        self.mvir = catalogue.masses.mvir[halo_id]
+        self.mass_200crit = catalogue.masses.mass_200crit[halo_index]
+        self.mass_200mean = catalogue.masses.mass_200mean[halo_index]
+        self.mass_bn98 = catalogue.masses.mass_bn98[halo_index]
+        self.mass_fof = catalogue.masses.mass_fof[halo_index]
+        self.mvir = catalogue.masses.mvir[halo_index]
 
-        self.r_200crit = catalogue.radii.r_200crit[halo_id]
-        self.r_200mean = catalogue.radii.r_200mean[halo_id]
-        self.r_bn98 = catalogue.radii.r_bn98[halo_id]
-        self.r_size = catalogue.radii.r_size[halo_id]
-        self.rmax = catalogue.radii.rmax[halo_id]
-        self.rvir = catalogue.radii.rvir[halo_id]
+        self.r_200crit = catalogue.radii.r_200crit[halo_index]
+        self.r_200mean = catalogue.radii.r_200mean[halo_index]
+        self.r_bn98 = catalogue.radii.r_bn98[halo_index]
+        self.r_size = catalogue.radii.r_size[halo_index]
+        self.rmax = catalogue.radii.rmax[halo_index]
+        self.rvir = catalogue.radii.rvir[halo_index]
 
-        self.x = catalogue.positions.xc[halo_id]
-        self.y = catalogue.positions.yc[halo_id]
-        self.z = catalogue.positions.zc[halo_id]
+        self.x = catalogue.positions.xc[halo_index]
+        self.y = catalogue.positions.yc[halo_index]
+        self.z = catalogue.positions.zc[halo_index]
 
         # x_gas and x_star are measured relative to xc for some reason.
         # The following may not be available in the catalogues.
         try:
-            self.x_gas = catalogue.positions.xc_gas[halo_id] + self.x
-            self.y_gas = catalogue.positions.yc_gas[halo_id] + self.y
-            self.z_gas = catalogue.positions.zc_gas[halo_id] + self.z
+            self.x_gas = catalogue.positions.xc_gas[halo_index] + self.x
+            self.y_gas = catalogue.positions.yc_gas[halo_index] + self.y
+            self.z_gas = catalogue.positions.zc_gas[halo_index] + self.z
         except AttributeError:
             pass
 
         try:
-            self.x_star = catalogue.positions.xc_star[halo_id] + self.x
-            self.y_star = catalogue.positions.yc_star[halo_id] + self.y
-            self.z_star = catalogue.positions.zc_star[halo_id] + self.z
+            self.x_star = catalogue.positions.xc_star[halo_index] + self.x
+            self.y_star = catalogue.positions.yc_star[halo_index] + self.y
+            self.z_star = catalogue.positions.zc_star[halo_index] + self.z
         except AttributeError:
             pass
 
         try:
-            self.x_mbp = catalogue.positions.xcmbp[halo_id]
-            self.y_mbp = catalogue.positions.ycmbp[halo_id]
-            self.z_mbp = catalogue.positions.zcmbp[halo_id]
+            self.x_mbp = catalogue.positions.xcmbp[halo_index]
+            self.y_mbp = catalogue.positions.ycmbp[halo_index]
+            self.z_mbp = catalogue.positions.zcmbp[halo_index]
         except AttributeError:
             pass
 
         return
-
