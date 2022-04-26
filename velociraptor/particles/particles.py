@@ -135,15 +135,23 @@ class VelociraptorGroups(object):
             unbound_particles_filename = filenames["unbound_particles_filename"]
             unbound_parttypes_filename = filenames["unbound_parttypes_filename"]
 
-        number_of_particles = self.offset[halo_id + 1] - self.offset[halo_id]
-        number_of_unbound_particles = (
-            self.offset_unbound[halo_id + 1] - self.offset_unbound[halo_id]
-        )
+        if halo_id == self.offset.size - 1:  # last halo in catalogue
+            with h5py.File(particles_filename) as particles_file:
+                total_particles = particles_file['Total_num_of_particles_in_all_groups'][0]
+            number_of_particles = total_particles - self.offset[halo_id]
+            with h5py.File(unbound_particles_filename) as unbound_particles_file:
+                total_unbound_particles = unbound_particles_file['Total_num_of_particles_in_all_groups'][0]
+            number_of_unbound_particles = total_unbound_particles - self.offset_unbound[halo_id]
+        else:
+            number_of_particles = self.offset[halo_id + 1] - self.offset[halo_id]
+            number_of_unbound_particles = (
+                self.offset_unbound[halo_id + 1] - self.offset_unbound[halo_id]
+            )
         assert (
             number_of_particles + number_of_unbound_particles
             == self.group_size[halo_id]
         ), "Something is incorrect in the calculation of group sizes for halo {}. Group_Size: {}, Bound: {}, Unbound: {}".format(
-            halo_id, number_of_particles, number_of_unbound_particles
+            halo_id, self.group_size[halo_id], number_of_particles, number_of_unbound_particles
         )
 
         particles = VelociraptorParticles(
