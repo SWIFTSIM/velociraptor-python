@@ -1195,22 +1195,39 @@ def registration_dust_masses(
             short_species = {
                 "GraphiteMasses": "graphite",
                 "SilicatesMasses": "silicates",
+                "SmallGrainMasses": "small_grain",
+                "LargeGrainMasses": "large_grain",
                 "GraphiteMassesAtomic": "atomic_graphite",
                 "SilicatesMassesAtomic": "atomic_silicates",
+                "SmallGrainMassesAtomic": "atomic_small_grain",
+                "LargeGrainMassesAtomic": "atomic_large_grain",
                 "GraphiteMassesMolecular": "molecular_graphite",
                 "SilicatesMassesMolecular": "molecular_silicates",
+                "SmallGrainMassesMolecular": "molecular_small_grain",
+                "LargeGrainMassesMolecular": "molecular_large_grain",
                 "GraphiteMassesColdDense": "cold_dense_graphite",
-                "SilicatesMassesColdDense": "cold_dense_silicates",                
+                "SilicatesMassesColdDense": "cold_dense_silicates",
+                "SmallGrainMassesColdDense": "cold_dense_small_grain",
+                "LargeGrainMassesColdDense": "cold_dense_large_grain",                
+
             }[long_species]
             pretty_name = {
                 "GraphiteMasses": "Graphite Dust Mass",
                 "SilicatesMasses": "Silicate Dust Mass",
+                "SmallGrainMasses": "small_grain",
+                "LargeGrainMasses": "large_grain",                
                 "GraphiteMassesAtomic": "Graphite Dust Mass in Atomic Gas",
                 "SilicatesMassesAtomic": "Silicate Dust Mass in Atomic Gas",
+                "SmallGrainMassesAtomic": "atomic_small_grain",
+                "LargeGrainMassesAtomic": "atomic_large_grain",
                 "GraphiteMassesMolecular": "Graphite Dust Mass in Molecular Gas",
                 "SilicatesMassesMolecular": "Silicate Dust Mass in Molecular Gas",
+                "SmallGrainMassesMolecular": "molecular_small_grain",
+                "LargeGrainMassesMolecular": "molecular_large_grain",
                 "GraphiteMassesColdDense": "Graphite Dust Mass in Cold-Dense Gas",
-                "SilicatesMassesColdDense": "Silicate Dust Mass in Cold-Dense Gas",                
+                "SilicatesMassesColdDense": "Silicate Dust Mass in Cold-Dense Gas",
+                "SmallGrainMassesColdDense": "cold_dense_small_grain",
+                "LargeGrainMassesColdDense": "cold_dense_large_grain",                                
             }[long_species]
         
         except KeyError:

@@ -55,7 +55,7 @@ def load_yaml_line_data(
     data: Dict[str, Dict]
         Dictionary of line data read directly from the files.
     """
-
+    
     if not isinstance(paths, list):
         paths = [paths]
         names = [names]
@@ -65,6 +65,13 @@ def load_yaml_line_data(
     for path, name in zip(paths, names):
         try:
             with open(path, "r") as handle:
+                inc = 0
+                while 1:
+                    if name in data:
+                        name += f'_{inc}'
+                        inc += 1
+                    else:
+                        break
                 data[name] = yaml.load(handle, Loader=yaml.Loader)
         except (OSError, FileNotFoundError):
             data[name] = {}
@@ -168,7 +175,7 @@ def recreate_single_figure(
         if line is not None:
             for color, (name, data) in enumerate(line_data.items()):
                 color_name = f"C{color}"
-
+                
                 try:
                     this_plot = data[plot.filename]
                     this_line_dict = this_plot["lines"][line_type]
