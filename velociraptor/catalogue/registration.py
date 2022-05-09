@@ -1117,7 +1117,6 @@ def registration_log_element_ratios_times_masses(
             f"({aperture_size} kpc)"
         )
         snake_case = f"log_{short_species}_times_{part_type}_mass_{short_floortype}_{aperture_size}_kpc"
-        print(snake_case)
         return unit, full_name, snake_case
     else:
         raise RegistrationDoesNotMatchError
