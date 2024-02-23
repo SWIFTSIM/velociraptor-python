@@ -3,7 +3,7 @@ Basic tests for loading a catalogue.
 """
 
 from velociraptor import load
-from helper import requires
+from .helper import requires
 
 
 @requires("cosmo_0000.properties")

@@ -109,7 +109,7 @@ parser.add_argument(
 )
 
 
-if __name__ == "__main__":
+def velociraptor_plot():
     # Parse our lovely arguments and pass them to the velociraptor library
     from velociraptor.autoplotter.objects import AutoPlotter
     from velociraptor.autoplotter.metadata import AutoPlotterMetadata
@@ -169,3 +169,7 @@ if __name__ == "__main__":
         auto_plotter_metadata.write_metadata(args.metadata)
 
     print_if_debug("Done.")
+
+
+if __name__ == "__main__":
+    velociraptor_plot()
