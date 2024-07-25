@@ -140,14 +140,17 @@ class CatalogueDataset(CatalogueElement):
            in the constructor.
         """
         metadata = handle[self.name].attrs
-        factor = (
-            metadata["Conversion factor to CGS (including cosmological corrections)"][0]
-            * unyt.A ** metadata["U_I exponent"][0]
-            * unyt.cm ** metadata["U_L exponent"][0]
-            * unyt.g ** metadata["U_M exponent"][0]
-            * unyt.K ** metadata["U_T exponent"][0]
-            * unyt.s ** metadata["U_t exponent"][0]
-        )
+        try:
+            factor = (
+                metadata["Conversion factor to CGS (including cosmological corrections)"][0]
+                * unyt.A ** metadata["U_I exponent"][0]
+                * unyt.cm ** metadata["U_L exponent"][0]
+                * unyt.g ** metadata["U_M exponent"][0]
+                * unyt.K ** metadata["U_T exponent"][0]
+                * unyt.s ** metadata["U_t exponent"][0]
+            )
+        except KeyError:
+            factor = 1.
         self.conversion_factor = unyt.unyt_quantity(factor)
         # avoid overflow by setting the base unit system to something that works
         # well for cosmological simulations
@@ -526,7 +529,7 @@ class SOAPCatalogue(Catalogue):
         """
         with h5py.File(self.file_name, "r") as handle:
             self.root = CatalogueGroup(self.file_name, "", handle)
-            cosmology = handle["SWIFT/Cosmology"].attrs
+            cosmology = handle["Cosmology"].attrs
             # set up a dummy units object for compatibility with the old VR API
             self.units = SimpleNamespace()
             self.a = cosmology["Scale-factor"][0]
@@ -534,13 +537,13 @@ class SOAPCatalogue(Catalogue):
             self.z = cosmology["Redshift"][0]
             self.units.redshift = cosmology["Redshift"][0]
 
-            swift_units = SWIFTUnitsMockup(dict(handle["SWIFT/Units"].attrs))
+            swift_units = SWIFTUnitsMockup(dict(handle["Units"].attrs))
             self.cosmology = swift_cosmology_to_astropy(dict(cosmology), swift_units)
 
             # get the box size and length unit from the SWIFT header and unit metadata
             boxsize = handle["SWIFT/Header"].attrs["BoxSize"][0]
             boxsize_unit = (
-                handle["SWIFT/InternalCodeUnits"].attrs["Unit length in cgs (U_L)"][0]
+                handle["Units"].attrs["Unit length in cgs (U_L)"][0]
                 * unyt.cm
             ).in_base("galactic")
             boxsize *= boxsize_unit
