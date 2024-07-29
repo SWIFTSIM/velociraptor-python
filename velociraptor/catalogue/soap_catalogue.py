@@ -142,7 +142,7 @@ class CatalogueDataset(CatalogueElement):
         metadata = handle[self.name].attrs
         try:
             factor = (
-                metadata["Conversion factor to CGS (including cosmological corrections)"][0]
+                metadata["Conversion factor to physical CGS (including cosmological corrections)"][0]
                 * unyt.A ** metadata["U_I exponent"][0]
                 * unyt.cm ** metadata["U_L exponent"][0]
                 * unyt.g ** metadata["U_M exponent"][0]
