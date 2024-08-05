@@ -149,8 +149,6 @@ class CatalogueDataset(CatalogueElement):
                 * unyt.K ** metadata["U_T exponent"][0]
                 * unyt.s ** metadata["U_t exponent"][0]
             )
-        except KeyError:
-            factor = 1.
         self.conversion_factor = unyt.unyt_quantity(factor)
         # avoid overflow by setting the base unit system to something that works
         # well for cosmological simulations
@@ -377,6 +375,8 @@ class CatalogueGroup(CatalogueElement):
         """
         h5group = handle[self.name] if self.name != "" else handle["/"]
         for (key, h5obj) in h5group.items():
+            if key == 'Cells':
+                continue
             if isinstance(h5obj, h5py.Group):
                 el = CatalogueGroup(self.file_name, f"{self.name}/{key}", handle)
                 dynamically_register_properties(el)
