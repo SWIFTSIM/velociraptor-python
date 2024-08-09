@@ -140,15 +140,14 @@ class CatalogueDataset(CatalogueElement):
            in the constructor.
         """
         metadata = handle[self.name].attrs
-        try:
-            factor = (
-                metadata["Conversion factor to physical CGS (including cosmological corrections)"][0]
-                * unyt.A ** metadata["U_I exponent"][0]
-                * unyt.cm ** metadata["U_L exponent"][0]
-                * unyt.g ** metadata["U_M exponent"][0]
-                * unyt.K ** metadata["U_T exponent"][0]
-                * unyt.s ** metadata["U_t exponent"][0]
-            )
+        factor = (
+            metadata["Conversion factor to physical CGS (including cosmological corrections)"][0]
+            * unyt.A ** metadata["U_I exponent"][0]
+            * unyt.cm ** metadata["U_L exponent"][0]
+            * unyt.g ** metadata["U_M exponent"][0]
+            * unyt.K ** metadata["U_T exponent"][0]
+            * unyt.s ** metadata["U_t exponent"][0]
+        )
         self.conversion_factor = unyt.unyt_quantity(factor)
         # avoid overflow by setting the base unit system to something that works
         # well for cosmological simulations
