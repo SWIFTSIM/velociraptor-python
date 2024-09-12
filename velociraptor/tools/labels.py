@@ -24,7 +24,7 @@ def get_mass_function_label_no_units(mass_function_sub_label: str):
     """
     Gets a fancy mass-function label such as:
 
-    d$n(M_*)$/d$\log_{10}M_*$ [Mpc$^{-3}$]
+    d$n(M_*)$/d$\\log_{10}M_*$ [Mpc$^{-3}$]
 
     (this would be for an input of "*" and unyt.Mpc**3).
     """
@@ -42,7 +42,7 @@ def get_mass_function_label(
     """
     Gets a fancy mass-function label such as:
 
-    d$n(M_*)$/d$\log_{10}M_*$ [Mpc$^{-3}$]
+    d$n(M_*)$/d$\\log_{10}M_*$ [Mpc$^{-3}$]
 
     (this would be for an input of "*" and unyt.Mpc**3).
     """
