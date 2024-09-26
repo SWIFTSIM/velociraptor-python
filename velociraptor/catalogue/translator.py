@@ -1489,6 +1489,42 @@ def VR_to_SOAP(particle_property_name: str) -> str:
             "exclusivesphere.100kpc.logarithmicmassweightedironoverhydrogenofstarshighlimit",
             -1,
         ),
+        "lin_element_ratios_times_masses.lin_Mg_over_H_times_star_mass_30_kpc": (
+            "exclusivesphere.30kpc.linearmassweightedmagnesiumoverhydrogenofstars",
+            -1,
+        ),
+        "lin_element_ratios_times_masses.lin_Mg_over_H_times_star_mass_50_kpc": (
+            "exclusivesphere.50kpc.linearmassweightedmagnesiumoverhydrogenofstars",
+            -1,
+        ),
+        "lin_element_ratios_times_masses.lin_Mg_over_H_times_star_mass_100_kpc": (
+            "exclusivesphere.100kpc.linearmassweightedmagnesiumoverhydrogenofstars",
+            -1,
+        ),
+        "log_element_ratios_times_masses.log_Mg_over_H_times_star_mass_lowfloor_30_kpc": (
+            "exclusivesphere.30kpc.logarithmicmassweightedmagnesiumoverhydrogenofstarslowlimit",
+            -1,
+        ),
+        "log_element_ratios_times_masses.log_Mg_over_H_times_star_mass_lowfloor_50_kpc": (
+            "exclusivesphere.50kpc.logarithmicmassweightedmagnesiumoverhydrogenofstarslowlimit",
+            -1,
+        ),
+        "log_element_ratios_times_masses.log_Mg_over_H_times_star_mass_lowfloor_100_kpc": (
+            "exclusivesphere.100kpc.logarithmicmassweightedmagnesiumoverhydrogenofstarslowlimit",
+            -1,
+        ),
+        "log_element_ratios_times_masses.log_Mg_over_H_times_star_mass_highfloor_30_kpc": (
+            "exclusivesphere.30kpc.logarithmicmassweightedmagnesiumoverhydrogenofstarshighlimit",
+            -1,
+        ),
+        "log_element_ratios_times_masses.log_Mg_over_H_times_star_mass_highfloor_50_kpc": (
+            "exclusivesphere.50kpc.logarithmicmassweightedmagnesiumoverhydrogenofstarshighlimit",
+            -1,
+        ),
+        "log_element_ratios_times_masses.log_Mg_over_H_times_star_mass_highfloor_100_kpc": (
+            "exclusivesphere.100kpc.logarithmicmassweightedmagnesiumoverhydrogenofstarshighlimit",
+            -1,
+        ),
         "cold_dense_gas_properties.cold_dense_diffuse_metal_mass_30_kpc": (
             "exclusivesphere.30kpc.gasmassincolddensediffusemetals",
             -1,
