@@ -120,7 +120,7 @@ def generate_getter(filename, name: str, field: str, full_name: str, unit):
                     if (
                         np.ndim(mask) != 0
                         and np.issubdtype(np.array(mask).dtype, np.integer)
-                        and np.all(mask[:-1] < mask[1:])
+                        and not np.all(mask[:-1] < mask[1:])
                     ):
                         # We have a mask picking out items by index, and it's
                         # not sorted. hdf5 demands that it be sorted.
