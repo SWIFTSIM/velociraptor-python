@@ -1561,6 +1561,10 @@ def VR_to_SOAP(particle_property_name: str) -> str:
             "exclusivesphere.100kpc.linearmassweightedironfromsniaoverhydrogenofstars",
             -1,
         ),
+        "searchradius.search_radius": (
+            "boundsubhalo.encloseradius",
+            -1,
+        ),
     }
 
     try:
