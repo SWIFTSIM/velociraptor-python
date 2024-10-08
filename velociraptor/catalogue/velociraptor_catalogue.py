@@ -117,9 +117,25 @@ def generate_getter(filename, name: str, field: str, full_name: str, unit):
             with h5py.File(filename, "r") as handle:
                 try:
                     mask = getattr(self, "mask")
-                    setattr(
-                        self, f"_{name}", unyt.unyt_array(handle[field][mask], unit)
-                    )
+                    if mask is Ellipsis:
+                        setattr(
+                            self,
+                            f"_{name}",
+                            unyt.unyt_array(handle[field][mask], unit),
+                        )
+                    else:
+                        # The mask might not be sorted, but hdf5 demands that
+                        # it be. We sort, read and then reverse the sort.
+                        sort_mask = np.argsort(mask)
+                        unsort_mask = np.argsort(sort_mask)
+                        setattr(
+                            self,
+                            f"_{name}",
+                            unyt.unyt_array(
+                                handle[field][mask[sort_mask]][unsort_mask],
+                                unit,
+                            ),
+                        )
                     getattr(self, f"_{name}").name = full_name
                     getattr(self, f"_{name}").file = filename
                 except KeyError:
