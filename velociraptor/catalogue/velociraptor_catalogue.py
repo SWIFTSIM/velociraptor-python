@@ -117,12 +117,14 @@ def generate_getter(filename, name: str, field: str, full_name: str, unit):
             with h5py.File(filename, "r") as handle:
                 try:
                     mask = getattr(self, "mask")
-                    if np.ndim(mask) != 0 and np.issubdtype(
-                        np.array(mask).dtype, np.integer
+                    if (
+                        np.ndim(mask) != 0
+                        and np.issubdtype(np.array(mask).dtype, np.integer)
+                        and np.all(mask[:-1] < mask[1:])
                     ):
-                        # We have a mask picking out items by index.
-                        # The mask might not be sorted, but hdf5 demands that
-                        # it be. We sort, read and then reverse the sort.
+                        # We have a mask picking out items by index, and it's
+                        # not sorted. hdf5 demands that it be sorted.
+                        # We sort, read and then reverse the sort.
                         sort_mask = np.argsort(mask)
                         unsort_mask = np.argsort(sort_mask)
                         setattr(
