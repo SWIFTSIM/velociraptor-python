@@ -5,6 +5,7 @@ This allows users to load the contents of various haloes as `swiftsimio`
 datasets in a computationally efficient way.
 """
 
+
 import swiftsimio
 import numpy as np
 
@@ -97,7 +98,7 @@ def generate_bound_mask(
 
     particle_name_masks = {}
 
-    for particle_name in data.metadata.present_group_names:
+    for particle_name in data.metadata.present_particle_names:
         # This will change if we ever take advantage of the
         # parttypes available through velociraptor.
         particle_name_masks[particle_name] = np.in1d(
@@ -106,7 +107,7 @@ def generate_bound_mask(
 
     # Finally we generate a named tuple with the correct fields and
     # fill it with the contents of our dictionary
-    MaskTuple = namedtuple("MaskCollection", data.metadata.present_group_names)
+    MaskTuple = namedtuple("MaskCollection", data.metadata.present_particle_names)
     mask = MaskTuple(**particle_name_masks)
 
     return mask
