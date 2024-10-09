@@ -117,9 +117,30 @@ def generate_getter(filename, name: str, field: str, full_name: str, unit):
             with h5py.File(filename, "r") as handle:
                 try:
                     mask = getattr(self, "mask")
-                    setattr(
-                        self, f"_{name}", unyt.unyt_array(handle[field][mask], unit)
-                    )
+                    if (
+                        np.ndim(mask) != 0
+                        and np.issubdtype(np.array(mask).dtype, np.integer)
+                        and not np.all(mask[:-1] < mask[1:])
+                    ):
+                        # We have a mask picking out items by index, and it's
+                        # not sorted. hdf5 demands that it be sorted.
+                        # We sort, read and then reverse the sort.
+                        sort_mask = np.argsort(mask)
+                        unsort_mask = np.argsort(sort_mask)
+                        setattr(
+                            self,
+                            f"_{name}",
+                            unyt.unyt_array(
+                                handle[field][mask[sort_mask]][unsort_mask],
+                                unit,
+                            ),
+                        )
+                    else:
+                        setattr(
+                            self,
+                            f"_{name}",
+                            unyt.unyt_array(handle[field][mask], unit),
+                        )
                     getattr(self, f"_{name}").name = full_name
                     getattr(self, f"_{name}").file = filename
                 except KeyError:
