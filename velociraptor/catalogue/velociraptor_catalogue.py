@@ -131,15 +131,12 @@ def generate_getter(filename, name: str, field: str, full_name: str, unit):
                             self,
                             f"_{name}",
                             unyt.unyt_array(
-                                handle[field][mask[sort_mask]][unsort_mask],
-                                unit,
+                                handle[field][mask[sort_mask]][unsort_mask], unit
                             ),
                         )
                     else:
                         setattr(
-                            self,
-                            f"_{name}",
-                            unyt.unyt_array(handle[field][mask], unit),
+                            self, f"_{name}", unyt.unyt_array(handle[field][mask], unit)
                         )
                     getattr(self, f"_{name}").name = full_name
                     getattr(self, f"_{name}").file = filename
