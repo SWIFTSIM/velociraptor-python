@@ -7,14 +7,14 @@ packages = ["velociraptor", "velociraptor.catalogue", "velociraptor.fitting_form
 
 [project]
 name = "velociraptor-python"
-version="0.16.1"
+version="0.18.0"
 authors = [
     { name="Josh Borrow", email="josh@joshborrow.com" },
     { name="Kyle Oman", email="kyle.a.oman@durham.ac.uk" },
 ]
 description="Velociraptor catalogue reading routines."
 readme = "README.md"
-requires-python = ">3.6.0"
+requires-python = ">3.10.0"
 classifiers = [
     "License :: OSI Approved :: GNU Lesser General Public License v3 or later (LGPLv3+)",
     "Operating System :: OS Independent",
