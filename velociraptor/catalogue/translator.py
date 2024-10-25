@@ -852,10 +852,7 @@ def VR_to_SOAP(particle_property_name: str) -> str:
         "spherical_overdensities.r_2500_rhocrit": ("so.2500_crit.soradius", -1),
         "spherical_overdensities.r_500_rhocrit": ("so.500_crit.soradius", -1),
         "structure_type.structuretype": ("inputhalos.iscentral", -1),
-        "black_hole_masses.max": (
-            "boundsubhalo.mostmassiveblackholemass",
-            -1,
-        ),
+        "black_hole_masses.max": ("boundsubhalo.mostmassiveblackholemass", -1),
         "temperature.t_gas": ("boundsubhalo.gastemperature", -1),
         "temperature.t_gas_hight_incl": (
             "boundsubhalo.gastemperaturewithoutcoolgas",
@@ -875,89 +872,29 @@ def VR_to_SOAP(particle_property_name: str) -> str:
         "positions.zcmbp": ("inputhalos.halocentre", 2),
         "positions.zcminpot": ("inputhalos.halocentre", 2),
         "metallicity.zmet_gas": ("boundsubhalo.gasmassfractioninmetals", -1),
-        "metallicity.zmet_star": (
-            "boundsubhalo.stellarmassfractioninmetals",
-            -1,
-        ),
+        "metallicity.zmet_star": ("boundsubhalo.stellarmassfractioninmetals", -1),
         "number.bh": ("boundsubhalo.numberofblackholeparticles", -1),
         "number.gas": ("boundsubhalo.numberofgasparticles", -1),
         "number.star": ("boundsubhalo.numberofstarparticles", -1),
-        "veldisp.veldisp_xx_gas": (
-            "boundsubhalo.gasvelocitydispersionmatrix",
-            0,
-        ),
-        "veldisp.veldisp_xx_star": (
-            "boundsubhalo.stellarvelocitydispersionmatrix",
-            0,
-        ),
-        "veldisp.veldisp_xy_gas": (
-            "boundsubhalo.gasvelocitydispersionmatrix",
-            3,
-        ),
-        "veldisp.veldisp_xy_star": (
-            "boundsubhalo.stellarvelocitydispersionmatrix",
-            3,
-        ),
-        "veldisp.veldisp_xz_gas": (
-            "boundsubhalo.gasvelocitydispersionmatrix",
-            4,
-        ),
-        "veldisp.veldisp_xz_star": (
-            "boundsubhalo.stellarvelocitydispersionmatrix",
-            4,
-        ),
-        "veldisp.veldisp_yx_gas": (
-            "boundsubhalo.gasvelocitydispersionmatrix",
-            3,
-        ),
-        "veldisp.veldisp_yx_star": (
-            "boundsubhalo.stellarvelocitydispersionmatrix",
-            3,
-        ),
-        "veldisp.veldisp_yy_gas": (
-            "boundsubhalo.gasvelocitydispersionmatrix",
-            1,
-        ),
-        "veldisp.veldisp_yy_star": (
-            "boundsubhalo.stellarvelocitydispersionmatrix",
-            1,
-        ),
-        "veldisp.veldisp_yz_gas": (
-            "boundsubhalo.gasvelocitydispersionmatrix",
-            5,
-        ),
-        "veldisp.veldisp_yz_star": (
-            "boundsubhalo.stellarvelocitydispersionmatrix",
-            5,
-        ),
-        "veldisp.veldisp_zx_gas": (
-            "boundsubhalo.gasvelocitydispersionmatrix",
-            4,
-        ),
-        "veldisp.veldisp_zx_star": (
-            "boundsubhalo.stellarvelocitydispersionmatrix",
-            4,
-        ),
-        "veldisp.veldisp_zy_gas": (
-            "boundsubhalo.gasvelocitydispersionmatrix",
-            5,
-        ),
-        "veldisp.veldisp_zy_star": (
-            "boundsubhalo.stellarvelocitydispersionmatrix",
-            5,
-        ),
-        "veldisp.veldisp_zz_gas": (
-            "boundsubhalo.gasvelocitydispersionmatrix",
-            2,
-        ),
-        "veldisp.veldisp_zz_star": (
-            "boundsubhalo.stellarvelocitydispersionmatrix",
-            2,
-        ),
-        "stellar_age.tage_star": (
-            "boundsubhalo.massweightedmeanstellarage",
-            -1,
-        ),
+        "veldisp.veldisp_xx_gas": ("boundsubhalo.gasvelocitydispersionmatrix", 0),
+        "veldisp.veldisp_xx_star": ("boundsubhalo.stellarvelocitydispersionmatrix", 0),
+        "veldisp.veldisp_xy_gas": ("boundsubhalo.gasvelocitydispersionmatrix", 3),
+        "veldisp.veldisp_xy_star": ("boundsubhalo.stellarvelocitydispersionmatrix", 3),
+        "veldisp.veldisp_xz_gas": ("boundsubhalo.gasvelocitydispersionmatrix", 4),
+        "veldisp.veldisp_xz_star": ("boundsubhalo.stellarvelocitydispersionmatrix", 4),
+        "veldisp.veldisp_yx_gas": ("boundsubhalo.gasvelocitydispersionmatrix", 3),
+        "veldisp.veldisp_yx_star": ("boundsubhalo.stellarvelocitydispersionmatrix", 3),
+        "veldisp.veldisp_yy_gas": ("boundsubhalo.gasvelocitydispersionmatrix", 1),
+        "veldisp.veldisp_yy_star": ("boundsubhalo.stellarvelocitydispersionmatrix", 1),
+        "veldisp.veldisp_yz_gas": ("boundsubhalo.gasvelocitydispersionmatrix", 5),
+        "veldisp.veldisp_yz_star": ("boundsubhalo.stellarvelocitydispersionmatrix", 5),
+        "veldisp.veldisp_zx_gas": ("boundsubhalo.gasvelocitydispersionmatrix", 4),
+        "veldisp.veldisp_zx_star": ("boundsubhalo.stellarvelocitydispersionmatrix", 4),
+        "veldisp.veldisp_zy_gas": ("boundsubhalo.gasvelocitydispersionmatrix", 5),
+        "veldisp.veldisp_zy_star": ("boundsubhalo.stellarvelocitydispersionmatrix", 5),
+        "veldisp.veldisp_zz_gas": ("boundsubhalo.gasvelocitydispersionmatrix", 2),
+        "veldisp.veldisp_zz_star": ("boundsubhalo.stellarvelocitydispersionmatrix", 2),
+        "stellar_age.tage_star": ("boundsubhalo.massweightedmeanstellarage", -1),
         "snia_rates.snia_rates_30_kpc": ("exclusivesphere.30kpc.totalsniarate", -1),
         "snia_rates.snia_rates_50_kpc": ("exclusivesphere.50kpc.totalsniarate", -1),
         "snia_rates.snia_rates_100_kpc": ("exclusivesphere.100kpc.totalsniarate", -1),
@@ -1225,26 +1162,14 @@ def VR_to_SOAP(particle_property_name: str) -> str:
             "boundsubhalo.medianstellarbirthdensity",
             -1,
         ),
-        "stellar_birth_densities.min": (
-            "boundsubhalo.minimumstellarbirthdensity",
-            -1,
-        ),
-        "stellar_birth_densities.max": (
-            "boundsubhalo.maximumstellarbirthdensity",
-            -1,
-        ),
+        "stellar_birth_densities.min": ("boundsubhalo.minimumstellarbirthdensity", -1),
+        "stellar_birth_densities.max": ("boundsubhalo.maximumstellarbirthdensity", -1),
         "stellar_birth_pressures.median": (
             "boundsubhalo.medianstellarbirthpressure",
             -1,
         ),
-        "stellar_birth_pressures.min": (
-            "boundsubhalo.minimumstellarbirthpressure",
-            -1,
-        ),
-        "stellar_birth_pressures.max": (
-            "boundsubhalo.maximumstellarbirthpressure",
-            -1,
-        ),
+        "stellar_birth_pressures.min": ("boundsubhalo.minimumstellarbirthpressure", -1),
+        "stellar_birth_pressures.max": ("boundsubhalo.maximumstellarbirthpressure", -1),
         "stellar_birth_temperatures.median": (
             "boundsubhalo.medianstellarbirthtemperature",
             -1,
@@ -1561,10 +1486,7 @@ def VR_to_SOAP(particle_property_name: str) -> str:
             "exclusivesphere.100kpc.linearmassweightedironfromsniaoverhydrogenofstars",
             -1,
         ),
-        "searchradius.search_radius": (
-            "boundsubhalo.encloseradius",
-            -1,
-        ),
+        "searchradius.search_radius": ("boundsubhalo.encloseradius", -1),
     }
 
     try:

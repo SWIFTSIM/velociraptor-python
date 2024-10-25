@@ -141,7 +141,9 @@ class CatalogueDataset(CatalogueElement):
         """
         metadata = handle[self.name].attrs
         factor = (
-            metadata["Conversion factor to physical CGS (including cosmological corrections)"][0]
+            metadata[
+                "Conversion factor to physical CGS (including cosmological corrections)"
+            ][0]
             * unyt.A ** metadata["U_I exponent"][0]
             * unyt.cm ** metadata["U_L exponent"][0]
             * unyt.g ** metadata["U_M exponent"][0]
@@ -374,7 +376,7 @@ class CatalogueGroup(CatalogueElement):
         """
         h5group = handle[self.name] if self.name != "" else handle["/"]
         for (key, h5obj) in h5group.items():
-            if key == 'Cells':
+            if key == "Cells":
                 continue
             if isinstance(h5obj, h5py.Group):
                 el = CatalogueGroup(self.file_name, f"{self.name}/{key}", handle)
@@ -542,8 +544,7 @@ class SOAPCatalogue(Catalogue):
             # get the box size and length unit from the SWIFT header and unit metadata
             boxsize = handle["SWIFT/Header"].attrs["BoxSize"][0]
             boxsize_unit = (
-                handle["Units"].attrs["Unit length in cgs (U_L)"][0]
-                * unyt.cm
+                handle["Units"].attrs["Unit length in cgs (U_L)"][0] * unyt.cm
             ).in_base("galactic")
             boxsize *= boxsize_unit
             physical_boxsize = self.a * boxsize
