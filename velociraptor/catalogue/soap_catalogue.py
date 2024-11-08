@@ -141,7 +141,9 @@ class CatalogueDataset(CatalogueElement):
         """
         metadata = handle[self.name].attrs
         factor = (
-            metadata["Conversion factor to CGS (including cosmological corrections)"][0]
+            metadata[
+                "Conversion factor to physical CGS (including cosmological corrections)"
+            ][0]
             * unyt.A ** metadata["U_I exponent"][0]
             * unyt.cm ** metadata["U_L exponent"][0]
             * unyt.g ** metadata["U_M exponent"][0]
@@ -374,6 +376,8 @@ class CatalogueGroup(CatalogueElement):
         """
         h5group = handle[self.name] if self.name != "" else handle["/"]
         for (key, h5obj) in h5group.items():
+            if key == "Cells":
+                continue
             if isinstance(h5obj, h5py.Group):
                 el = CatalogueGroup(self.file_name, f"{self.name}/{key}", handle)
                 dynamically_register_properties(el)
@@ -526,7 +530,7 @@ class SOAPCatalogue(Catalogue):
         """
         with h5py.File(self.file_name, "r") as handle:
             self.root = CatalogueGroup(self.file_name, "", handle)
-            cosmology = handle["SWIFT/Cosmology"].attrs
+            cosmology = handle["Cosmology"].attrs
             # set up a dummy units object for compatibility with the old VR API
             self.units = SimpleNamespace()
             self.a = cosmology["Scale-factor"][0]
@@ -534,14 +538,13 @@ class SOAPCatalogue(Catalogue):
             self.z = cosmology["Redshift"][0]
             self.units.redshift = cosmology["Redshift"][0]
 
-            swift_units = SWIFTUnitsMockup(dict(handle["SWIFT/Units"].attrs))
+            swift_units = SWIFTUnitsMockup(dict(handle["Units"].attrs))
             self.cosmology = swift_cosmology_to_astropy(dict(cosmology), swift_units)
 
             # get the box size and length unit from the SWIFT header and unit metadata
             boxsize = handle["SWIFT/Header"].attrs["BoxSize"][0]
             boxsize_unit = (
-                handle["SWIFT/InternalCodeUnits"].attrs["Unit length in cgs (U_L)"][0]
-                * unyt.cm
+                handle["Units"].attrs["Unit length in cgs (U_L)"][0] * unyt.cm
             ).in_base("galactic")
             boxsize *= boxsize_unit
             physical_boxsize = self.a * boxsize
