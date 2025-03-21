@@ -55,20 +55,16 @@ def generate_spatial_mask(
             "Please use a particles instance with an associated halo " "catalogue."
         )
 
-    spatial_mask = [
-        [
-            particles.x / length_factor - particles.r_size / length_factor,
-            particles.x / length_factor + particles.r_size / length_factor,
-        ],
-        [
-            particles.y / length_factor - particles.r_size / length_factor,
-            particles.y / length_factor + particles.r_size / length_factor,
-        ],
-        [
-            particles.z / length_factor - particles.r_size / length_factor,
-            particles.z / length_factor + particles.r_size / length_factor,
-        ],
-    ]
+    xyz = swiftsimio.cosmo_array(
+        [particles.x, particles.y, particles.z],
+        comoving=True,
+        scale_factor=length_factor,
+        scale_exponent=1,
+    )
+    size = swiftsimio.cosmo_array(
+        particles.r_size, comoving=True, scale_factor=length_factor, scale_exponent=1
+    )
+    spatial_mask = swiftsimio.cosmo_array([xyz - size, xyz + size]).T
 
     swift_mask.constrain_spatial(spatial_mask)
 
@@ -97,11 +93,27 @@ def generate_bound_mask(
 
     particle_name_masks = {}
 
+    try:
+        if not particles.groups_instance.catalogue.units.comoving:
+            length_factor = particles.groups_instance.catalogue.units.a
+        else:
+            length_factor = 1.0
+    except AttributeError:
+        raise RuntimeError(
+            "Please use a particles instance with an associated halo " "catalogue."
+        )
+
     for particle_name in data.metadata.present_group_names:
         # This will change if we ever take advantage of the
         # parttypes available through velociraptor.
         particle_name_masks[particle_name] = np.in1d(
-            getattr(data, particle_name).particle_ids, particles.particle_ids
+            getattr(data, particle_name).particle_ids,
+            swiftsimio.cosmo_array(
+                particles.particle_ids,
+                comoving=True,
+                scale_factor=length_factor,
+                scale_exponent=0,
+            ),
         )
 
     # Finally we generate a named tuple with the correct fields and
