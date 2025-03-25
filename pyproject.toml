@@ -7,7 +7,7 @@ packages = ["velociraptor", "velociraptor.catalogue", "velociraptor.fitting_form
 
 [project]
 name = "velociraptor-python"
-version="0.18.0"
+version="0.19.0"
 authors = [
     { name="Josh Borrow", email="josh@joshborrow.com" },
     { name="Kyle Oman", email="kyle.a.oman@durham.ac.uk" },
