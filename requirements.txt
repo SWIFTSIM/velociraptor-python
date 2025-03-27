@@ -7,4 +7,4 @@ tqdm
 pyyaml
 black
 matplotlib
-swiftsimio>=6.1.0
+swiftsimio>=10.0.0
