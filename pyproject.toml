@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 packages = ["velociraptor", "velociraptor.catalogue", "velociraptor.fitting_formulae", "velociraptor.observations", "velociraptor.autoplotter", "velociraptor.particles", "velociraptor.swift", "velociraptor.tools"]
 
 [project]
-name = "velociraptor-python"
+name = "velociraptor"
 version="0.19.0"
 authors = [
     { name="Josh Borrow", email="josh@joshborrow.com" },
