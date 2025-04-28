@@ -70,10 +70,10 @@ This yaml file has the following format:
          units: end value units
        # Restriction of binning vertically
        lower:
-         value: lower value for median/mean line
+         value: floor value when computing median/mean line
          units: lower value units
        upper:
-         value: upper value for median/mean line
+         value: ceiling value when computing median/mean line
          units: upper value units
      # Generic metadata for plot
      metadata:

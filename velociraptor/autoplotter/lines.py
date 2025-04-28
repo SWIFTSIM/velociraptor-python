@@ -252,6 +252,9 @@ class VelociraptorLine(object):
             mask = isnan(x)
             masked_x = masked_x[~mask]
 
+        if (self.lower is not None) and (self.upper is not None):
+            assert self.upper > self.lower
+
         if self.lower is not None:
             self.lower.convert_to_units(y.units)
             mask = masked_y < self.lower
