@@ -110,7 +110,7 @@ def generate_bound_mask(
             getattr(data, particle_name).particle_ids,
             swiftsimio.cosmo_array(
                 particles.particle_ids,
-                comoving=True,
+                comoving=False,
                 scale_factor=length_factor,
                 scale_exponent=0,
             ),
