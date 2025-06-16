@@ -7,7 +7,7 @@ the master VelociraptorUnits class.
 import unyt
 import h5py
 
-from astropy.cosmology.core import Cosmology
+from astropy.cosmology import Cosmology
 from astropy.cosmology import wCDM, FlatLambdaCDM
 
 

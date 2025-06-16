@@ -13,7 +13,7 @@ from matplotlib.pyplot import Axes
 from matplotlib import rcParams
 
 from astropy.units import Quantity
-from astropy.cosmology.core import Cosmology
+from astropy.cosmology import Cosmology
 from astropy.cosmology import wCDM, FlatLambdaCDM
 
 import h5py
