@@ -286,8 +286,10 @@ class VelociraptorLine(object):
                 masked_x, self.bins, box_volume=box_volume
             )
             if self.box_size_correction is not None:
-                mass_function_output = self.box_size_correction.apply_mass_function_correction(
-                    mass_function_output
+                mass_function_output = (
+                    self.box_size_correction.apply_mass_function_correction(
+                        mass_function_output
+                    )
                 )
             self.output = (
                 *mass_function_output,
@@ -334,8 +336,10 @@ class VelociraptorLine(object):
                 return_bin_edges=True,
             )
             if self.box_size_correction is not None:
-                mass_function_output = self.box_size_correction.apply_mass_function_correction(
-                    mass_function_output
+                mass_function_output = (
+                    self.box_size_correction.apply_mass_function_correction(
+                        mass_function_output
+                    )
                 )
             self.output = (
                 *mass_function_output,
@@ -356,7 +360,6 @@ class VelociraptorLine(object):
         x_lim: List,
         y_lim: List,
     ) -> None:
-
         """
         Add arrows to the plot for each data point residing outside the plot's domain.
         The arrows indicate where the missing points are. For a given missing data point
@@ -581,9 +584,9 @@ class VelociraptorLine(object):
         if self.scatter == "none" or errors is None:
             (line,) = ax.plot(centers, heights, label=label)
         elif self.scatter == "errorbar":
-            (line, *_) = ax.errorbar(centers, heights, yerr=errors, label=label)
+            line, *_ = ax.errorbar(centers, heights, yerr=errors, label=label)
         elif self.scatter == "errorbar_both":
-            (line, *_) = ax.errorbar(
+            line, *_ = ax.errorbar(
                 centers,
                 heights,
                 yerr=errors,

@@ -30,7 +30,7 @@ def get_mass_function_label_no_units(mass_function_sub_label: str):
     """
 
     output = (
-        fr"d$n(M_{mass_function_sub_label})$/d$\log_{{10}}M_{mass_function_sub_label}$"
+        rf"d$n(M_{mass_function_sub_label})$/d$\log_{{10}}M_{mass_function_sub_label}$"
     )
 
     return output
@@ -50,7 +50,7 @@ def get_mass_function_label(
     unit_repr = mass_function_units.latex_representation()
     mass_func_label = get_mass_function_label_no_units(mass_function_sub_label)
 
-    output = fr"{mass_func_label} $\left[{unit_repr}\right]$"
+    output = rf"{mass_func_label} $\left[{unit_repr}\right]$"
 
     return output
 
@@ -64,6 +64,6 @@ def get_luminosity_function_label_no_units(luminosity_function_sub_label: str):
     (this would be for an input of "*" and unyt.Mpc**3).
     """
 
-    output = fr"$\phi(M_{luminosity_function_sub_label})$"
+    output = rf"$\phi(M_{luminosity_function_sub_label})$"
 
     return output

@@ -17,8 +17,8 @@ import sys
 
 lowest_stellar_mass = 1e7 * unyt.msun
 highest_stellar_mass = 1e12 * unyt.msun
-lowest_smf = 1e-6 / (unyt.Mpc ** 3)
-highest_smf = 10 ** (-0.5) / (unyt.Mpc ** 3)
+lowest_smf = 1e-6 / (unyt.Mpc**3)
+highest_smf = 10 ** (-0.5) / (unyt.Mpc**3)
 
 box_volume = (float(sys.argv[2]) * unyt.Mpc) ** 3
 

@@ -375,7 +375,7 @@ class CatalogueGroup(CatalogueElement):
         of this group in the SOAP HDF5 file.
         """
         h5group = handle[self.name] if self.name != "" else handle["/"]
-        for (key, h5obj) in h5group.items():
+        for key, h5obj in h5group.items():
             if key == "Cells":
                 continue
             if isinstance(h5obj, h5py.Group):
@@ -549,9 +549,9 @@ class SOAPCatalogue(Catalogue):
             boxsize *= boxsize_unit
             physical_boxsize = self.a * boxsize
             self.units.box_length = boxsize
-            self.units.comoving_box_volume = boxsize ** 3
+            self.units.comoving_box_volume = boxsize**3
             self.units.period = physical_boxsize
-            self.units.physical_box_volume = physical_boxsize ** 3
+            self.units.physical_box_volume = physical_boxsize**3
             self.units.cosmology = self.cosmology
 
     def get_SOAP_quantity(self, quantity_name: str) -> unyt.unyt_array:

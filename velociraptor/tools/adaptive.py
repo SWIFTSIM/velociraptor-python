@@ -5,7 +5,6 @@ Tools for creating adaptive bins based on an input array.
 import numpy as np
 import unyt
 
-
 adaptive_bin_cache = {}
 
 
@@ -52,7 +51,7 @@ def create_adaptive_bins(
 
     lowest_value: unyt.unyt_quantity
         the lowest value edge of the bins
-    
+
     highest_value: unyt.unyt_quantity
         the highest value edge of the bins
 
@@ -209,7 +208,7 @@ def create_adaptive_bins(
     try:
         if logarithmic:
             bin_centers = unyt.unyt_array(
-                [10 ** x for x in bin_medians], units=values.units, name=values.name
+                [10**x for x in bin_medians], units=values.units, name=values.name
             )
 
             bin_edges = unyt.unyt_array(

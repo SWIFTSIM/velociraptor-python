@@ -107,7 +107,7 @@ def create_histogram(
 
     lowest_mass: unyt.unyt_quantity
         the lowest mass edge of the bins
-    
+
     highest_mass: unyt.unyt_quantity
         the highest mass edge of the bins
 

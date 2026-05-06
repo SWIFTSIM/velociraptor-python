@@ -1,5 +1,5 @@
 """
-Velociraptor particles interaction functions. These allow users to 
+Velociraptor particles interaction functions. These allow users to
 extract the particles belonging to, e.g. a single halo.
 """
 

@@ -113,8 +113,8 @@ def velociraptor_compute_box_size_correction():
     large_y_range = large_spline(x_range)
 
     if log_y:
-        small_y_range = 10.0 ** small_y_range
-        large_y_range = 10.0 ** large_y_range
+        small_y_range = 10.0**small_y_range
+        large_y_range = 10.0**large_y_range
 
     correction = large_y_range / small_y_range
 

@@ -17,8 +17,8 @@ import sys
 
 lowest_halo_mass = 1e9 * unyt.msun
 highest_halo_mass = 1e14 * unyt.msun
-lowest_mf = 1e-4 / (unyt.Mpc ** 3)
-highest_mf = 1e1 / (unyt.Mpc ** 3)
+lowest_mf = 1e-4 / (unyt.Mpc**3)
+highest_mf = 1e1 / (unyt.Mpc**3)
 
 box_volume = (float(sys.argv[2]) * unyt.Mpc) ** 3
 

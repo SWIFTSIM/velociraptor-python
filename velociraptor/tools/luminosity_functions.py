@@ -94,7 +94,7 @@ def create_luminosity_function(
 
     lowest_magnitude: unyt.unyt_quantity
         the lowest magnitude edge of the bins
-    
+
     highest_magnitude: unyt.unyt_quantity
         the highest magnitude edge of the bins
 

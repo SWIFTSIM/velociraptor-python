@@ -45,7 +45,7 @@ def histogram_x_against_y(
 ) -> Tuple[plt.Figure, plt.Axes]:
     """
     Creates a plot of x against y with a 2d histogram in the background.
-    
+
     Actually uses pcolormesh and the numpy histogram method.
     """
 

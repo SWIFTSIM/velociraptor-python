@@ -567,7 +567,7 @@ class ObservationalData(object):
     def associate_name(self, name: str):
         """
         Associate a name with this observational data instance.
-        
+
         Parameters
         ----------
 
@@ -729,12 +729,12 @@ class ObservationalData(object):
                 self.y,
                 yerr=self.y_scatter,
                 xerr=self.x_scatter,
-                lolims=self.lower_limits.value
-                if self.lower_limits is not None
-                else None,
-                uplims=self.upper_limits.value
-                if self.upper_limits is not None
-                else None,
+                lolims=(
+                    self.lower_limits.value if self.lower_limits is not None else None
+                ),
+                uplims=(
+                    self.upper_limits.value if self.upper_limits is not None else None
+                ),
                 **kwargs,
                 label=data_label,
             )
@@ -819,7 +819,7 @@ class MultiRedshiftObservationalData(object):
             range [0.0, 1000.0], and hence should overlap with all
             reasonable datasets.
 
-        
+
         Notes
         -----
 
@@ -910,7 +910,7 @@ class MultiRedshiftObservationalData(object):
     def associate_name(self, name: str):
         """
         Associate a name with this observational data instance.
-        
+
         Parameters
         ----------
 

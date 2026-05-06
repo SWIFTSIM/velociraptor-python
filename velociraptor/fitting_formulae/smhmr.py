@@ -75,7 +75,7 @@ def moster_raw(z, Mhalo):
     beta = beta_10 + beta_11 * z / (z + 1)
     gama = gama_10 + gama_11 * z / (z + 1)
 
-    M_1 = 10 ** log_M_1
+    M_1 = 10**log_M_1
 
     # Equation 2
     Mstar_over_Mhalo = 2.0 * N * ((Mhalo / M_1) ** -beta + (Mhalo / M_1) ** gama) ** -1
@@ -128,7 +128,7 @@ def behroozi_raw(z, Mhalo):
     Provided by Matthieu Schaller.
     """
     aexp = 1.0 / (1.0 + z)
-    nu = np.exp(-4.0 * aexp ** 2)
+    nu = np.exp(-4.0 * aexp**2)
     mh = Mhalo
     m1_0 = 11.514
     m1_a = -1.793
@@ -161,7 +161,7 @@ def behroozi_raw(z, Mhalo):
         np.log10(1.0 + np.exp(x0))
     ) ** gamma / (1.0 + np.exp(10.0 ** (-1.0 * x0)))
     logmstar = np.log10(eps * m1) + f - f0
-    return 10.0 ** logmstar
+    return 10.0**logmstar
 
 
 def behroozi_2019_raw(z, Mhalo):
@@ -247,4 +247,4 @@ def behroozi_2019_raw(z, Mhalo):
         + zparams["gamma"] * np.exp(-0.5 * (dm2 * dm2))
     )
 
-    return 10.0 ** logmstar
+    return 10.0**logmstar

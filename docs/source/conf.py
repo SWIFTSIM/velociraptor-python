@@ -16,7 +16,6 @@ import sys
 sys.path.insert(0, os.path.abspath("."))
 import velociraptor
 
-
 # -- Project information -----------------------------------------------------
 
 project = "VELOCIraptor Python Tools"

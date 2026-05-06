@@ -1357,7 +1357,7 @@ def registration_stellar_birth_densities(
     if not field_path[:14] == "BirthDensities" and field_path[-4:] == "star":
         raise RegistrationDoesNotMatchError
 
-    unit = unit_system.mass / unit_system.length ** 3
+    unit = unit_system.mass / unit_system.length**3
 
     # Need to do a regex search (average, min, max)
     match_string = "BirthDensities_([a-z]+)_star"
@@ -1390,7 +1390,7 @@ def registration_snii_thermal_feedback_densities(
     ):
         raise RegistrationDoesNotMatchError
 
-    unit = unit_system.mass / unit_system.length ** 3
+    unit = unit_system.mass / unit_system.length**3
 
     # Need to do a regex search (average, min, max)
     match_string = "DensitiesAtLastSupernovaEvent_([a-z]+)_gas"

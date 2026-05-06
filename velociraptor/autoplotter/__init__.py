@@ -56,7 +56,7 @@ This yaml file has the following format:
          below: number (in same units)
          above: number
      # Lines that you can plot on top - line_type can be median or mean
-     line_type: 
+     line_type:
        plot: true/false (true by default) actually plot this?
        log: true/false (true by default) use log bins?
        scatter: "none", "errorbar", "errorbar_both", or "shaded". Defaults to shaded

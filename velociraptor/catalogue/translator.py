@@ -1512,7 +1512,7 @@ def typo_correct(particle_property_name: str):
 
 def get_aperture_unit(unit_name: str, unit_system: VelociraptorUnits):
     """
-    Converts the velociraptor strings to internal velociraptor units 
+    Converts the velociraptor strings to internal velociraptor units
     from the naming convention in the velociraptor files.
     """
 

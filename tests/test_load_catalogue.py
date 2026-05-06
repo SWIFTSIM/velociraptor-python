@@ -7,7 +7,9 @@ from .helper import requires
 
 
 @requires("cosmo_0000.properties")
-def test_basic_load_catalogue_no_crash(filename="test_data/cosmo_0000.properties",):
+def test_basic_load_catalogue_no_crash(
+    filename="test_data/cosmo_0000.properties",
+):
     catalogue = load(filename)
 
     return

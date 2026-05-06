@@ -54,7 +54,7 @@ class VelociraptorLineMetadata(object):
     def to_dict(self):
         """
         Convert the contents of this into a dictionary (not using
-        __dict__ as that is used for hashing and I don't want to 
+        __dict__ as that is used for hashing and I don't want to
         mess with that here)
         """
 
@@ -71,9 +71,9 @@ class VelociraptorLineMetadata(object):
             additional_points_x_units=str(self.additional_x.units),
             additional_points_y=self.additional_y.value.tolist(),
             additional_points_y_units=str(self.additional_y.units),
-            bins_x=self.line.bins.value.tolist()
-            if self.line.bins is not None
-            else None,
+            bins_x=(
+                self.line.bins.value.tolist() if self.line.bins is not None else None
+            ),
             bins_x_units=str(
                 self.line.bins.units if self.line.bins is not None else None
             ),

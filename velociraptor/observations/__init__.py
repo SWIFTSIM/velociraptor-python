@@ -70,7 +70,7 @@ def load_observations(
         file overlap with this bracket, they are returned. By default, this
         bracket is 0.0 to 1000.0, so will encompass all reasonable
         observations present in the file.
-    
+
 
     Returns
     -------
