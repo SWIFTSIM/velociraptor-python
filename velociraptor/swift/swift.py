@@ -43,26 +43,22 @@ def generate_spatial_mask(
     # (this is only approximate down to the swift cell size)
     swift_mask = swiftsimio.mask(snapshot_filename, spatial_only=True)
 
-    # SWIFT data is stored in comoving units, so we need to un-correct
-    # the velociraptor data if it is stored in physical.
-    try:
-        if not particles.groups_instance.catalogue.units.comoving:
-            length_factor = particles.groups_instance.catalogue.units.a
-        else:
-            length_factor = 1.0
-    except AttributeError:
+    if not hasattr(particles.groups_instance, "catalogue"):
         raise RuntimeError(
-            "Please use a particles instance with an associated halo " "catalogue."
+            "Please use a particles instance with an associated halo catalogue."
         )
 
     xyz = swiftsimio.cosmo_array(
         [particles.x, particles.y, particles.z],
-        comoving=True,
-        scale_factor=length_factor,
+        comoving=particles.groups_instance.catalogue.units.comoving,
+        scale_factor=particles.groups_instance.catalogue.units.a,
         scale_exponent=1,
     )
     size = swiftsimio.cosmo_array(
-        particles.r_size, comoving=True, scale_factor=length_factor, scale_exponent=1
+        particles.r_size,
+        comoving=particles.groups_instance.catalogue.units.comoving,
+        scale_factor=particles.groups_instance.catalogue.units.a,
+        scale_exponent=1,
     )
     spatial_mask = swiftsimio.cosmo_array([xyz - size, xyz + size]).T
 
@@ -93,14 +89,9 @@ def generate_bound_mask(
 
     particle_name_masks = {}
 
-    try:
-        if not particles.groups_instance.catalogue.units.comoving:
-            length_factor = particles.groups_instance.catalogue.units.a
-        else:
-            length_factor = 1.0
-    except AttributeError:
+    if not hasattr(particles.groups_instance, "catalogue"):
         raise RuntimeError(
-            "Please use a particles instance with an associated halo " "catalogue."
+            "Please use a particles instance with an associated halo catalogue."
         )
 
     for particle_name in data.metadata.present_group_names:
@@ -110,8 +101,8 @@ def generate_bound_mask(
             getattr(data, particle_name).particle_ids,
             swiftsimio.cosmo_array(
                 particles.particle_ids,
-                comoving=False,
-                scale_factor=length_factor,
+                comoving=particles.groups_instance.catalogue.units.comoving,
+                scale_factor=particles.groups_instance.catalogue.units.a,
                 scale_exponent=0,
             ),
         )
