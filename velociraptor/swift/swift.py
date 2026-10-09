@@ -41,7 +41,7 @@ def generate_spatial_mask(
     # First use the swiftsimio spatial masking to constrain our dataset
     # to only contain particles within the cube that contains the halo
     # (this is only approximate down to the swift cell size)
-    swift_mask = swiftsimio.mask(snapshot_filename, spatial_only=True)
+    swift_mask = swiftsimio.mask(snapshot_filename)
 
     if not hasattr(particles.groups_instance, "catalogue"):
         raise RuntimeError(
